@@ -85,7 +85,7 @@ paGating/
 
 Clone the repository:
 ```bash
-git clone https://github.com/yourusername/paGating.git
+git clone https://github.com/guglxni/paGating.git
 cd paGating
 ```
 
@@ -93,6 +93,13 @@ Install requirements:
 ```bash
 pip install -r requirements.txt
 ```
+
+Set up data directories and download datasets:
+```bash
+python scripts/download_data.py
+```
+
+> **Note**: This repository uses symlinks for large data files. See [docs/DATA_SETUP.md](docs/DATA_SETUP.md) for detailed setup instructions.
 
 ## Quick Start
 
