@@ -1,0 +1,62 @@
+name: Run paGating Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install torch numpy matplotlib pytest pytest-cov
+        pip install -e .
+        # Try to install optional dependencies
+        pip install onnx onnxruntime || echo "Skipping ONNX dependencies"
+    
+    - name: Run main tests
+      run: |
+        pytest tests/ -v --tb=short --cov=paGating --cov-report=xml
+    
+    - name: Run normalization integration tests
+      run: |
+        pytest tests/test_norm_integration.py -v
+    
+    - name: Run ONNX export tests if available
+      run: |
+        python -c "import onnx" && python -c "import onnxruntime" && \
+        pytest tests/test_onnx_norm_export.py -v || echo "Skipping ONNX tests (dependencies not installed)"
+    
+    - name: Run benchmark
+      run: |
+        mkdir -p benchmarks/norm_variants
+        python experiments/benchmark_gateflow.py --device cpu --use-gate-norm --pre-norm --post-norm --output-dir benchmarks/norm_variants
+    
+    - name: Upload test coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        fail_ci_if_error: false
+    
+    - name: Upload benchmark artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: benchmark-results
+        path: benchmarks/norm_variants/
+        retention-days: 14 

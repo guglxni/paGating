@@ -1,0 +1,19 @@
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.0.0
+accelerate>=0.20.0
+
+# Optional: for ONNX/CoreML export
+
+onnx>=1.14.0
+onnxruntime>=1.15.0
+coremltools>=7.0
+
+numpy>=1.20.0
+matplotlib>=3.4.0
+tqdm>=4.61.0
+pillow>=8.2.0
+pyyaml
+pandas
+seaborn
+tf-keras>=2.13.1

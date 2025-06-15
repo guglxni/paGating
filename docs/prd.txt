@@ -1,0 +1,70 @@
+# Title:
+Development of the paGating Activation Family – A Modular Framework for Tunable Gated Neural Units
+
+# Goal:
+To implement a new family of adaptive activation functions (paGLU, paGTU, paSwishU, paReGLU) using partial gating via a tunable parameter α. Each unit should interpolate between passthrough and full gating to improve signal flow, gradient stability, and power-aware deployment across architectures (CNNs, Transformers).
+
+# Deliverables:
+- paGatingBase class with support for tunable, learnable, or contextual α
+- Individual paUnits: paGLU, paGTU, paSwishU, paReGLU
+- PyTorch experiments on CIFAR-10 and transformer blocks
+- Benchmark suite: forward time, gradient flow, α schedules, CoreML deployment
+- Visualization scripts (gate outputs, α heatmaps)
+- Unit tests for each paUnit
+- Optional support for paUnit export to CoreML for ANE benchmarking
+- Fully documented GitHub repo and README
+
+# Tasks:
+
+## ARCHITECTURE
+- Implement paGatingBase class with α handling logic
+- Add support for callable α (context-aware or input-based)
+- Allow any differentiable activation as a plug-in gate
+
+## UNIT IMPLEMENTATIONS
+- Implement paGLU: Linear + Sigmoid gate
+- Implement paGTU: Tanh + Sigmoid gate
+- Implement paSwishU: Linear + Swish gate
+- Implement paReGLU: Linear + ReLU gate
+
+## α EXTENSIONS
+- Add support for static, learnable, and dynamic α
+- Create alpha_schedulers.py (cosine, linear, entropy-aware)
+- Implement CLI flag to control α mode during training
+
+## EXPERIMENTS
+- Build paCNN (CNN with interchangeable paUnits)
+- Build paTransformer block with paUnits in FFN layer
+- Train on CIFAR-10 for accuracy + training curves
+- Record gradient heatmaps for dead neuron analysis
+
+## BENCHMARKING
+- Run inference benchmarks with CPU, CUDA, MPS (Apple)
+- Export paGLU + paGTU to CoreML (INT8/FP16)
+- Compare inference cost of each unit
+- Generate α-gating vs baseline charts
+
+## VISUALIZATION
+- Plot gate outputs over B(x)
+- Animate α-sweeps across units (2D and 3D)
+- Generate α heatmaps per layer during training
+- Visualize effect of α on activation saturation
+
+## TESTING
+- Write unit tests for paGatingBase
+- Write tests for each paUnit (shape, range, α behavior)
+- Write CoreML export test for paGLU and paGTU
+
+## DOCUMENTATION
+- Create README.md with modular usage examples
+- Add architecture diagrams (paUnit block flow, benchmark charts)
+- Include latex-style formula renderings in docstrings
+- Write PRD-to-tasks.md (TaskMaster export)
+
+# Priority:
+HIGH – all units must be integrated into models, benchmarked, visualized, and documented before final project submission.
+
+# Success Criteria:
+- paUnits outperform or match baseline units in accuracy
+- α control shows improved gradient flow or inference stability
+- Project is cleanly documented and benchmarked for future publication or patent

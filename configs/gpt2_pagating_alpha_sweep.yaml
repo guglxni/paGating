@@ -1,0 +1,14 @@
+# Sweep: GPT-2 + paGating α-modes
+_target_: scripts.run_sweep.run_sweep       # existing helper
+experiment_name: pagating_alpha_sweep
+output_root: logs/phase2_sweeps
+
+grid:
+  alpha_mode: [static_0.0, static_0.5, static_0.8, learnable, scheduler_cosine]
+  learning_rate: [5e-4, 1e-4]
+  batch_size: [4]
+
+# Static α values map to paUnit kwargs; learnable/scheduler handled in model init
+max_steps: 20000            # quick sweep to stay disk-friendly
+eval_interval: 1000
+save_interval: 5000 

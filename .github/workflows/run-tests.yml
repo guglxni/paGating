@@ -1,0 +1,51 @@
+name: paGating Test Suite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10']
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov torch numpy matplotlib
+        pip install -e .
+        
+    - name: Run unit tests for run_unit_tests.py
+      run: |
+        pytest tests/test_run_unit_tests.py -v
+        
+    - name: Check if gateflow image was created
+      run: |
+        if [ -f "paMishU_gateflow.png" ]; then
+          echo "✅ Gateflow image created successfully"
+        else
+          echo "❌ Gateflow image was not created"
+          exit 1
+        fi
+        
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-artifacts-${{ matrix.python-version }}
+        path: |
+          paMishU_gateflow.png
+          test_results/
+        if-no-files-found: warn 
