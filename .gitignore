@@ -253,3 +253,11 @@ repomix-output.xml
 texput.log
 *.fdb_latexmk
 *.fls
+
+# Security - exclude files that might contain sensitive information
+.specstory/history/2025-06-04_10-22-begin-implementation-of-optimization-plan.md
+**/hf_token*
+**/*token*
+**/*secret*
+**/*key*.txt
+**/*api_key*
