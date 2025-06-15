@@ -258,7 +258,7 @@ This framework is featured in our IEEE TNNLS submission:
 
 **"paGating: A Parameterized Activation Gating Framework for Flexible and Efficient Neural Networks for GenAI"**
 
-- **Authors**: Aaryan Guglani, Rajashree Shettar
+- **Authors**: Aaryan Guglani, Dr. Rajashree Shettar
 - **Institution**: RV College of Engineering, Bengaluru
 - **Status**: Under Review at IEEE Transactions on Neural Networks and Learning Systems
 - **Reproducibility**: Complete reproduction guide available in [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md)
