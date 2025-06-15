@@ -8,7 +8,7 @@
 ### Author Information
 - **Primary Author:** Aaryan Guglani
 - **Affiliation:** Independent Researcher
-- **Email:** aaryan.guglani@example.com
+- **Email:** aaryanguglani.cs21@rvce.edu.in
 - **Research Area:** Machine Learning, Neural Networks, Activation Functions
 
 ### Paper Type

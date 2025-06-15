@@ -4,7 +4,7 @@ setup(
     name="paGating",
     version="0.1.0",
     author="Aaryan Guglani",
-    author_email="aaryanguglani@example.com",
+    author_email="aaryanguglani.cs21@rvce.edu.in",
     description="Parameterized Activation Gating Framework",
     packages=find_packages(),
     python_requires=">=3.8",
