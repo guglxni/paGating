@@ -256,6 +256,7 @@ texput.log
 
 # Security - exclude files that might contain sensitive information
 .specstory/history/2025-06-04_10-22-begin-implementation-of-optimization-plan.md
+.specstory/history/2025-06-13_18-06-recreate-report-tex-file-from-repomix.md
 **/hf_token*
 **/*token*
 **/*secret*
